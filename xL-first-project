@@ -1,0 +1,107 @@
+from openpyxl import Workbook, load_workbook
+from openpyxl.utils import get_column_letter
+from openpyxl.styles import Font
+
+data = {
+	"Cat-1": {
+		"Weight": 15,
+		"Height(cm)":50 ,
+		"Fur Type": 'Long',
+		"Eye Color": 'Brown'
+	},
+	"Cat-2": {
+		"Weight": 18,
+		"Height(cm)":40 ,
+		"Fur Type": 'Short',
+		"Eye Color": 'Green'
+	},
+	"Cat-3": {
+		"Weight": 25,
+		"Height(cm)":90 ,
+		"Fur Type": 'Long',
+		"Eye Color": 'Purple'
+	},
+	"Cat-4": {
+		"Weight": 35,
+		"Height(cm)":80 ,
+		"Fur Type": 'Short',
+		"Eye Color": 'Blue'
+	},
+	"Cat-5": {
+		"Weight": 95,
+		"Height(cm)":10 ,
+		"Fur Type": 'Long',
+		"Eye Color": 'Orange'
+	}
+}
+
+wb = Workbook()
+ws = wb.active
+ws.title = "Cat"
+
+headings = ['Name'] + list(data['Cat-1'].keys())
+ws.append(headings)
+
+for feline in data:
+	catType = list(data[feline].values())
+	ws.append([feline] + catType)
+
+for col in range(1, 6):
+	ws[get_column_letter(col) + '1'].font = Font(bold=True, color="00FF6600")
+
+
+data = {
+	"Dog-1": {
+		"Weight": 15,
+		"Height(cm)":50 ,
+		"Fur Type": 'Long',
+		"Eye Color": 'Brown'
+	},
+	"Dog-2": {
+		"Weight": 18,
+		"Height(cm)":40 ,
+		"Fur Type": 'Short',
+		"Eye Color": 'Green'
+	},
+	"Dog-3": {
+		"Weight": 25,
+		"Height(cm)":90 ,
+		"Fur Type": 'Long',
+		"Eye Color": 'Purple'
+	},
+	"Dog-4": {
+		"Weight": 35,
+		"Height(cm)":80 ,
+		"Fur Type": 'Short',
+		"Eye Color": 'Blue'
+	},
+	"Dog-5": {
+		"Weight": 95,
+		"Height(cm)":10 ,
+		"Fur Type": 'Long',
+		"Eye Color": 'Orange'
+	}
+}
+
+
+ws1 = wb.create_sheet("dog", 0)
+ws1.title = "Dog"
+
+headings = ['Name'] + list(data['Dog-1'].keys())
+ws1.append(headings)
+
+for canine in data:
+	dogType = list(data[canine].values())
+	ws1.append([canine] + dogType)
+
+for col in range(1, 6):
+	ws1[get_column_letter(col) + '1'].font = Font(bold=True, color="00FF6600")
+
+
+
+wb.save("Cats.xlsx")
+
+
+
+
+
